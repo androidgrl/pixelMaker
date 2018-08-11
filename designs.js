@@ -11,19 +11,23 @@ function makeGrid(e) {
 
   for (let y = 0; y < height; y++) {
     let row = document.createElement('tr')
-    row.setAttribute('id', `y-${y}`)
+    row.setAttribute('id', `y${y}`)
     pixelCanvas.appendChild(row)
-    row = document.getElementById(`y-${y}`)
+    row = document.getElementById(`y${y}`)
 
     for (let x = 0; x < width; x++) {
       let cell = document.createElement('td')
-      cell.setAttribute('id', `y-${y}x-${x}`)
       row.appendChild(cell)
     }
   }
+
+  pixelCanvas.addEventListener('click', function(e) {
+    let cell = e.target
+    let color = document.getElementById('colorPicker').value
+    cell.style.backgroundColor = color
+  })
   e.preventDefault()
 }
 
 const sizePicker = document.getElementById('sizePicker');
-
 sizePicker.addEventListener('submit', makeGrid);
